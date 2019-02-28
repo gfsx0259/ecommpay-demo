@@ -22,6 +22,11 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+    <link rel="stylesheet" href="/build/app.css">
+    <link rel="stylesheet" href="https://paymentpage.ecommpay.com/shared/merchant.css" />
+    <script type="text/javascript" src="https://paymentpage.ecommpay.com/shared/merchant.js"></script>
+
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -76,6 +81,8 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+
+<script src="/build/app.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>

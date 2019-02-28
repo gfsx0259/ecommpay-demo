@@ -6,8 +6,13 @@ use app\models\PaymentForm;
 use ecommpay\Gate;
 use ecommpay\Payment;
 
-class PaymentController extends \yii\web\Controller
+class PaymentModalController extends \yii\web\Controller
 {
+    public function actionIndex()
+    {
+        return $this->render('index', ['model' => new PaymentForm()]);
+    }
+
     const MERCHANT_SECRET_KEY = 'test';
     const MERCHANT_PROJECT_ID = '402';
 
@@ -35,7 +40,6 @@ class PaymentController extends \yii\web\Controller
             // Ссылка на которую будет совершён редирект (если установлена) в случае успешной оплаты
             ->setRedirectSuccessUrl($successPageUrl);
 
-        // TODO overwrite PaymentPage for using local host
         $paymentPageUrl = $gate->getPurchasePaymentPageUrl($payment);
 
         $this->redirect($paymentPageUrl);
@@ -44,16 +48,10 @@ class PaymentController extends \yii\web\Controller
     public function actionCallback()
     {
         die('Заказ успешно оплачен №' . \Yii::$app->request->get('payment_id'));
-//      $data = json_encode(\Yii::$app->request->post(), JSON_PRETTY_PRINT);
     }
 
     public function actionNotify()
     {
         die("200 OK");
-    }
-
-    public function actionIndex()
-    {
-        return $this->render('index', ['model' => new PaymentForm()]);
     }
 }
