@@ -11,7 +11,8 @@ services:
         networks:
             - code-network
     php:
-        image: php:fpm
+        build:
+            context: ./build/php
         volumes:
             - ./:/code
         networks:
