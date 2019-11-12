@@ -34,6 +34,15 @@ services:
             -  "./rabbitmq/logs:/var/log/rabbitmq"
         networks:
             - code-network
+    centrifugo:
+        image: centrifugo/centrifugo
+        command: centrifugo --admin
+        volumes:
+            - ./build/centrifugo/:/centrifugo
+        ports:
+            - "8000:8000"
+        networks:
+            - code-network
 networks:
     code-network:
         driver: bridge

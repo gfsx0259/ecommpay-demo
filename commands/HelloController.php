@@ -36,6 +36,8 @@ class HelloController extends Controller
 
         $callback = function ($msg) {
             echo ' [x] Received ', $msg->body, "\n";
+            sleep($this->countSymbol($msg->body, '.'));
+            echo ' [x] Done';
         };
 
         $channel->basic_consume('hello', '', false, true, false, false, $callback);
@@ -45,5 +47,15 @@ class HelloController extends Controller
         }
 
         return ExitCode::OK;
+    }
+
+    /**
+     * @param string $string
+     * @param mixed $symbol
+     * @return int
+     */
+    public function countSymbol($string, $symbol) {
+        $counted = count_chars($string, 1);
+        return $counted[ord($symbol)];
     }
 }
