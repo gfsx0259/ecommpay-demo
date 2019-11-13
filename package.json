@@ -3,6 +3,7 @@
     "@symfony/webpack-encore": "^0.23.0"
   },
   "dependencies": {
+    "centrifuge": "^2.2.3",
     "ecommpay": "^0.1.2"
   }
 }

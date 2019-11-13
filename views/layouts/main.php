@@ -22,11 +22,14 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-
+    <?php
+    $client = new \phpcent\Client("http://centrifugo:8000/api");
+    $client->setSecret("f4b65d2f-f114-4b3f-9028-19356d573d28");
+    $token = $client->generateConnectionToken();
+    ?>
     <link rel="stylesheet" href="/build/app.css">
-    <link rel="stylesheet" href="https://paymentpage.ecommpay.com/shared/merchant.css" />
-    <script type="text/javascript" src="https://paymentpage.ecommpay.com/shared/merchant.js"></script>
-
+    <?php echo $this->registerJs("
+        var jwt = '".  $token."';",\yii\web\View::POS_BEGIN);?>
 </head>
 <body>
 <?php $this->beginBody() ?>

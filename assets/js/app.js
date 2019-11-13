@@ -1,28 +1,20 @@
 // assets/js/app.js
 
 require('../css/app.css');
+var Centrifuge = require("centrifuge");
 
-const { Payment } = require('ecommpay');
+var centrifuge = new Centrifuge('ws://localhost:8000/connection/websocket', {
+    debug: true
+});
 
-// TODO так не делать
-const signer = require('../../node_modules/ecommpay/src/signer');
+centrifuge.setToken(jwt);
 
-let params = {
-    project_id: '402',
-    payment_currency: 'RUB',
-    baseUrl: 'http://pp.terminal.test',
-};
+window.sub = centrifuge.subscribe("demo", function(message) {
+    console.log(message);
+});
 
-payBtn.onclick = function () {
-    let changedParams = {
-        payment_id: document.getElementById('payment_id').value,
-        payment_amount: document.getElementById('amount').value,
-    };
+centrifuge.on('connect', function(context) {
+  console.log(context);
+});
 
-    let signatureParams = Object.assign(changedParams, params);
-
-    const signature = signer(signatureParams, 'test');
-
-    EPayWidget.run(Object.assign({signature: signature}, signatureParams));
-    return false;
-};
+centrifuge.connect();
