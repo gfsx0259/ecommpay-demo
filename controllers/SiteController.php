@@ -116,6 +116,16 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionSend()
+    {
+        $message = 'message ' . rand(1, 10);
+        $client = new \phpcent\Client("http://centrifugo:8000/api");
+        $client->setApiKey("eae5e8d2-078d-49c6-9fbc-5a694e38b96a");
+
+        $client->publish("demo", ["message" => $message]);
+        return $this->renderContent('ok');
+    }
+
     /**
      * Displays about page.
      *

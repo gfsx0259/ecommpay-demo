@@ -9,8 +9,9 @@ var centrifuge = new Centrifuge('ws://localhost:8000/connection/websocket', {
 
 centrifuge.setToken(jwt);
 
-window.sub = centrifuge.subscribe("demo", function(message) {
-    console.log(message);
+window.sub = centrifuge.subscribe("demo");
+sub.on('publish', function(context) {
+    console.log(context);
 });
 
 centrifuge.on('connect', function(context) {

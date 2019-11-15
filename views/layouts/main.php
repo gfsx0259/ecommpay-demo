@@ -25,7 +25,7 @@ AppAsset::register($this);
     <?php
     $client = new \phpcent\Client("http://centrifugo:8000/api");
     $client->setSecret("f4b65d2f-f114-4b3f-9028-19356d573d28");
-    $token = $client->generateConnectionToken();
+    $token = $client->generateConnectionToken('55');
     ?>
     <link rel="stylesheet" href="/build/app.css">
     <?php echo $this->registerJs("
