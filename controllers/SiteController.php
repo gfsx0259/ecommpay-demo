@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ChatForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -98,6 +99,19 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionChat()
+    {
+        if (Yii::$app->request->isPost) {
+            $model = new ChatForm();
+            $model->load(Yii::$app->request->post());
+
+            $this->send($model->message);
+            return $this->renderContent('ok');
+        }
+
+        return $this->render('chat', ['model' => new ChatForm()]);
+    }
+
     /**
      * Displays contact page.
      *
@@ -116,9 +130,8 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSend()
+    public function send($message)
     {
-        $message = 'message ' . rand(1, 10);
         $client = new \phpcent\Client("http://centrifugo:8000/api");
         $client->setApiKey("eae5e8d2-078d-49c6-9fbc-5a694e38b96a");
 
