@@ -13,6 +13,7 @@ use yii\bootstrap\Html;
 
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?= $form->field($model, 'message')->textarea(['rows' => 6])->label() ?>
+        <?= $form->field($model, 'recipientId')->label() ?>
 
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>

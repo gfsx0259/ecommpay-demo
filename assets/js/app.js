@@ -4,12 +4,13 @@ require('../css/app.css');
 var Centrifuge = require("centrifuge");
 
 var centrifuge = new Centrifuge('ws://localhost:8000/connection/websocket', {
-    debug: true
+    debug: true,
+    user: userId
 });
 
 centrifuge.setToken(jwt);
 
-window.sub = centrifuge.subscribe("demo");
+window.sub = centrifuge.subscribe('demo#' + userId);
 sub.on('publish', function(context) {
     console.log(context);
     $('.messages').append($('<div>').html(context.data.message));
@@ -23,7 +24,7 @@ centrifuge.connect();
 
 
 $(function () {
-    $("button[type=\"submit\"]").click(() => {
+    $("#contact-form button[type=\"submit\"]").click(() => {
         $.ajax({
             url: '/?r=site/chat',
             type: 'post',

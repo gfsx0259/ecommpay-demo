@@ -25,11 +25,15 @@ AppAsset::register($this);
     <?php
     $client = new \phpcent\Client("http://centrifugo:8000/api");
     $client->setSecret("f4b65d2f-f114-4b3f-9028-19356d573d28");
-    $token = $client->generateConnectionToken('55');
+    $token = $client->generateConnectionToken(Yii::$app->user->id);
     ?>
     <link rel="stylesheet" href="/build/app.css">
     <?php echo $this->registerJs("
-        var jwt = '".  $token."';",\yii\web\View::POS_BEGIN);?>
+        var jwt = '".  $token."';
+        var userId = '". (string)Yii::$app->user->id."'",
+        \yii\web\View::POS_BEGIN);
+
+    ?>
 </head>
 <body>
 <?php $this->beginBody() ?>

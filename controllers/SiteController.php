@@ -105,7 +105,7 @@ class SiteController extends Controller
             $model = new ChatForm();
             $model->load(Yii::$app->request->post());
 
-            $this->send($model->message);
+            $this->send($model->message, $model->recipientId);
             return $this->renderContent('ok');
         }
 
@@ -130,12 +130,12 @@ class SiteController extends Controller
         ]);
     }
 
-    public function send($message)
+    public function send($message, $recipientId)
     {
         $client = new \phpcent\Client("http://centrifugo:8000/api");
         $client->setApiKey("eae5e8d2-078d-49c6-9fbc-5a694e38b96a");
 
-        $client->publish("demo", ["message" => $message]);
+        $client->publish('demo#' . $recipientId, ['message' => $message]);
         return $this->renderContent('ok');
     }
 
