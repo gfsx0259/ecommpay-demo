@@ -7,7 +7,8 @@
     {
       "name": "shared",
       "presence": true,
-      "join_leave": true
+      "join_leave": true,
+      "anonymous": true
     }
   ]
 }
