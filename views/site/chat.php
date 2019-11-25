@@ -9,6 +9,13 @@ use yii\bootstrap\Html;
         <p style="background: white; height:300px; width:100%" class="messages"></p>
     </div>
 
+    <div class="join-chat">
+        <select multiple id="joinChat" height="300" weight="500">
+        </select>
+
+        <input type="button" value="Send join request"/>
+    </div>
+
     <div class="col-lg-5">
 
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
