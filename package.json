@@ -5,6 +5,6 @@
   "dependencies": {
     "centrifuge": "^2.2.3",
     "ecommpay": "^0.1.2",
-    "yarn": "^1.19.1"
+    "yarn": "^1.22.0"
   }
 }
